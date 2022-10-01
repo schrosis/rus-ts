@@ -1,0 +1,9 @@
+{
+  "entryPoints": ["./src/index.ts"],
+  "includeVersion": true,
+  "plugin": [
+    "typedoc-plugin-missing-exports"
+  ],
+  "requiredToBeDocumented": ["Enum", "Class"],
+  "sort": "source-order"
+}
