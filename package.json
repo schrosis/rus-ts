@@ -1,7 +1,7 @@
 {
   "name": "@schrosis/rusty-ts",
   "version": "0.0.1",
-  "description": "Something like Rust, which excels at type inference.",
+  "description": "Something like Rust with excellent type inference.",
   "main": "dist/index.js",
   "types": "dist/index.ts",
   "license": "MIT",
@@ -13,6 +13,7 @@
     "build": "tsc"
   },
   "devDependencies": {
+    "@knodes/typedoc-plugin-pages": "^0.23.1",
     "@types/jest": "^29.1.1",
     "@typescript-eslint/eslint-plugin": "^5.38.1",
     "@typescript-eslint/parser": "^5.38.1",
