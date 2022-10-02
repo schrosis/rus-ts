@@ -32,6 +32,7 @@ export class OptionImpl {
    */
   isSome<T>(this: Option<T>): this is Some<T> {
     // NOTE: This method is not called because it is proxied.
+    /* istanbul ignore next */
     return this.isSome();
   }
 
@@ -52,6 +53,7 @@ export class OptionImpl {
    */
   isNone<T>(this: Option<T>): this is None {
     // NOTE: This method is not called because it is proxied.
+    /* istanbul ignore next */
     return this.isNone();
   }
 
