@@ -20,6 +20,7 @@ jobs:
       - name: Build docs
         run: |
           yarn install
+          yarn test
           yarn docs
       
       - name: Upload GitHub Pages artifact
