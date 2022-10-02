@@ -6,4 +6,4 @@ module.exports = {
     '^@schrosis/rusty-ts$': '<rootDir>/src',
     '^@schrosis/rusty-ts/(.*)$': '<rootDir>/src/$1',
   },
-}
+};
