@@ -1,7 +1,7 @@
 import { None as NoneClass } from './none';
 import { Some as SomeClass } from './some';
 import { Mixin, mixin } from '../util';
-import { fromNullable, fromUndefinedable, OptionImpl } from './impl';
+import { fromNullable, fromUndefinable, OptionImpl } from './impl';
 
 const optionImpl = new OptionImpl();
 
@@ -22,7 +22,7 @@ export type Option<T> = None | Some<T>;
  * [In Rust](https://doc.rust-lang.org/std/option/enum.Option.html)
  */
 export const Option = {
-  fromUndefinedable,
+  fromUndefinable,
   fromNullable,
 };
 
@@ -42,7 +42,7 @@ export type None = Mixin<NoneClass, OptionImpl>;
  *
  * @see {@link Option}
  */
-export const None = mixin(new NoneClass(), optionImpl);
+export const None: None = mixin(new NoneClass(), optionImpl);
 
 /**
  * Some value of type T.
@@ -60,4 +60,5 @@ export type Some<T> = Mixin<SomeClass<T>, OptionImpl>;
  *
  * @see {@link Option}
  */
-export const Some = <T>(value: T) => mixin(new SomeClass(value), optionImpl);
+export const Some = <T>(value: T): Some<T> =>
+  mixin(new SomeClass(value), optionImpl);

@@ -275,13 +275,13 @@ export class OptionImpl {
    * ```ts
    * const arr2d = [['A0', 'A1'], ['B0', 'B1']];
    *
-   * const item01 = Option.fromUndefinedable(arr2d.at(0)).andThen((row) => {
-   *   return Option.fromUndefinedable(row.at(1));
+   * const item01 = Option.fromUndefinable(arr2d.at(0)).andThen((row) => {
+   *   return Option.fromUndefinable(row.at(1));
    * });
    * assert.deepEqual(item01, Some('A1'));
    *
-   * const item20 = Option.fromUndefinedable(arr2d.at(2)).andThen((row) => {
-   *   return Option.fromUndefinedable(row.at(0));
+   * const item20 = Option.fromUndefinable(arr2d.at(2)).andThen((row) => {
+   *   return Option.fromUndefinable(row.at(0));
    * });
    * assert.deepEqual(item20, None);
    * ```
@@ -501,18 +501,18 @@ export class OptionImpl {
  *
  * ```ts
  * const x: string | undefined = 'foo';
- * assert.deepEqual(Option.fromUndefinedable(x), Some('foo'));
+ * assert.deepEqual(Option.fromUndefinable(x), Some('foo'));
  *
  * const y: string | undefined = undefined;
- * assert.deepEqual(Option.fromUndefinedable(y), None);
+ * assert.deepEqual(Option.fromUndefinable(y), None);
  *
  * const z = 'bar';
- * assert.deepEqual(Option.fromUndefinedable(z), Some('bar'));
+ * assert.deepEqual(Option.fromUndefinable(z), Some('bar'));
  * ```
  *
  * This is not in Rust.
  */
-export const fromUndefinedable = <T>(value: T | undefined): Option<T> => {
+export const fromUndefinable = <T>(value: T | undefined): Option<T> => {
   return typeof value === 'undefined' ? None : Some(value);
 };
 
