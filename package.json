@@ -1,5 +1,5 @@
 {
-  "name": "@schrosis/rusty-ts",
+  "name": "@schrosis/rus-ts",
   "version": "0.0.1",
   "description": "Something like Rust with excellent type inference.",
   "main": "dist/index.js",

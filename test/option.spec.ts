@@ -1,4 +1,4 @@
-import { None, Option, Some } from '@schrosis/rusty-ts';
+import { None, Option, Some } from '@schrosis/rus-ts';
 import assert from 'assert';
 
 describe('Option', () => {

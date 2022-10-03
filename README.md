@@ -1,4 +1,4 @@
-# rusty-ts
+# @schrosis/rus-ts
 
 🦀 < Something like Rust with excellent type inference.
 
@@ -50,7 +50,7 @@ if (result.isSome()) {
 
 #### Method overview
 
-[Option implements](https://schrosis.github.io/rusty-ts/classes/_internal_.OptionImpl.html) several methods in Rust `Option`.
+[Option implements](https://schrosis.github.io/rus-ts/classes/_internal_.OptionImpl.html) several methods in Rust `Option`.
 
 ##### Querying the variant
 
@@ -129,4 +129,4 @@ There are methods to generate `Option` from these types.
 
 ## For more
 
-🦀 < See [the module level documentation](https://schrosis.github.io/rusty-ts/modules.html) for more.
+🦀 < See [the module level documentation](https://schrosis.github.io/rus-ts/modules.html) for more.
