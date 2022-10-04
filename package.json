@@ -16,18 +16,18 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/schrosis/rusty-ts"
+    "url": "https://github.com/schrosis/rus-ts"
   },
   "bugs": {
-    "url": "https://github.com/schrosis/rusty-ts/issues"
+    "url": "https://github.com/schrosis/rus-ts/issues"
   },
-  "homepage": "https://github.com/schrosis/rusty-ts#readme",
+  "homepage": "https://github.com/schrosis/rus-ts#readme",
   "scripts": {
     "docs": "typedoc",
     "lint": "eslint {src,test}/**/*.ts --fix",
     "test": "jest",
     "test:cov": "jest --coverage",
-    "build": "tsc"
+    "build": "tsc --project tsconfig.build.json"
   },
   "devDependencies": {
     "@knodes/typedoc-plugin-pages": "^0.23.1",
