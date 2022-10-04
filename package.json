@@ -3,8 +3,25 @@
   "version": "0.0.1",
   "description": "Something like Rust with excellent type inference.",
   "main": "dist/index.js",
-  "types": "dist/index.ts",
+  "types": "dist/index.d.ts",
   "license": "MIT",
+  "author": "Schrosis",
+  "keywords": [
+    "option",
+    "result",
+    "type",
+    "typescript",
+    "rust",
+    "error-handling"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/schrosis/rusty-ts"
+  },
+  "bugs": {
+    "url": "https://github.com/schrosis/rusty-ts/issues"
+  },
+  "homepage": "https://github.com/schrosis/rusty-ts#readme",
   "scripts": {
     "docs": "typedoc",
     "lint": "eslint {src,test}/**/*.ts --fix",
