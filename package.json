@@ -27,7 +27,7 @@
     "lint": "eslint {src,test}/**/*.ts --fix",
     "test": "jest",
     "test:cov": "jest --coverage",
-    "build": "tsc"
+    "build": "tsc --project tsconfig.build.json"
   },
   "devDependencies": {
     "@knodes/typedoc-plugin-pages": "^0.23.1",
