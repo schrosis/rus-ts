@@ -5,7 +5,7 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "license": "MIT",
-  "author": "Schrosis",
+  "author": "schrosis",
   "keywords": [
     "option",
     "result",
