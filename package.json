@@ -6,7 +6,14 @@
   "types": "dist/index.d.ts",
   "license": "MIT",
   "author": "Schrosis",
-  "keywords": [],
+  "keywords": [
+    "option",
+    "result",
+    "type",
+    "typescript",
+    "rust",
+    "error-handling"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/schrosis/rusty-ts"
