@@ -4,13 +4,21 @@
 
 ## Install
 
-Coming soon.
+```
+npm install @schrosis/rus-ts
+```
+
+or
+
+```
+yarn add @schrosis/rus-ts
+```
 
 ## Feature
 
 - Rust like Option type.
 - Rust like Result type. (Coming soon)
-- Zero dependency
+- Zero dependency.
 - No panic!
 
 ## Usage
