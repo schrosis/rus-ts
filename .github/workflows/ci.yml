@@ -29,3 +29,6 @@ jobs:
         uses: mattallty/jest-github-action@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build Docs
+        run: yarn docs
