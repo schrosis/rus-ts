@@ -3,7 +3,7 @@ module.exports = {
     '^.+\\.ts$': 'ts-jest',
   },
   moduleNameMapper: {
-    '^@schrosis/rusty-ts$': '<rootDir>/src',
-    '^@schrosis/rusty-ts/(.*)$': '<rootDir>/src/$1',
+    '^@schrosis/rus-ts$': '<rootDir>/src',
+    '^@schrosis/rus-ts/(.*)$': '<rootDir>/src/$1',
   },
 };
