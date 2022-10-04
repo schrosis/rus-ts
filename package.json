@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "Something like Rust with excellent type inference.",
   "main": "dist/index.js",
-  "types": "dist/index.ts",
+  "types": "dist/index.d.ts",
   "license": "MIT",
   "author": "Schrosis",
   "keywords": [],
