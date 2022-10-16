@@ -1,4 +1,4 @@
-import { None, Option, Some } from '@schrosis/rus-ts';
+import { Err, None, Ok, Option, Result, Some } from '@schrosis/rus-ts';
 import assert from 'assert';
 
 describe('Option', () => {
@@ -49,6 +49,10 @@ describe('Option', () => {
       const maybeSomeLen = maybeSomeString.map((s) => s.length);
 
       assert.deepEqual(maybeSomeLen, Some(13));
+      assert.deepEqual(
+        (None as Option<string>).map((s) => s.length),
+        None,
+      );
     });
   });
 
@@ -94,13 +98,27 @@ describe('Option', () => {
 
   describe('okOr', () => {
     it('Transforms the Option<T> into a Result<T, E>, mapping Some(v) to Ok(v) and None to Err(err).', () => {
-      // TODO
+      const x = Some('foo');
+      assert.deepEqual(x.okOr(0), Ok('foo'));
+
+      const y: Option<string> = None;
+      assert.deepEqual(y.okOr(0), Err(0));
     });
   });
 
   describe('okOrElse', () => {
     it('Transforms the Option<T> into a Result<T, E>, mapping Some(v) to Ok(v) and None to Err(err()).', () => {
-      // TODO
+      const x = Some('foo');
+      assert.deepEqual(
+        x.okOrElse(() => 0),
+        Ok('foo'),
+      );
+
+      const y: Option<string> = None;
+      assert.deepEqual(
+        y.okOrElse(() => 0),
+        Err(0),
+      );
     });
   });
 
@@ -227,7 +245,21 @@ describe('Option', () => {
 
   describe('transpose', () => {
     it('Transposes an Option of a Result into a Result of an Option.', () => {
-      // TODO
+      type SomeErr = { message: string };
+
+      const a: Option<Result<number, SomeErr>> = Some(Ok(5));
+      const b: Result<Option<number>, SomeErr> = Ok(Some(5));
+      assert.deepEqual(a.transpose(), b);
+
+      const c: Option<Result<number, SomeErr>> = Some(
+        Err({ message: 'some error' }),
+      );
+      const d: Result<Option<number>, SomeErr> = Err({ message: 'some error' });
+      assert.deepEqual(c.transpose(), d);
+
+      const e: Option<Result<number, SomeErr>> = None;
+      const f: Result<Option<number>, SomeErr> = Ok(None);
+      assert.deepEqual(e.transpose(), f);
     });
   });
 

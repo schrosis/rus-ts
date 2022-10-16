@@ -1,4 +1,5 @@
 import { None, Option, Some } from '.';
+import { Err, Ok, Result } from '../result';
 
 // TODO: fix to link
 /**
@@ -107,6 +108,7 @@ export class OptionImpl {
    * const maybeSomeLen = maybeSomeString.map((s) => s.length);
    *
    * assert.deepEqual(maybeSomeLen, Some(13));
+   * assert.deepEqual((None as Option<string>).map((s) => s.length), None);
    * ```
    *
    * [In Rust](https://doc.rust-lang.org/std/option/enum.Option.html#method.map)
@@ -161,69 +163,49 @@ export class OptionImpl {
     return this.isSome() ? f(this.value) : def();
   }
 
-  // /// Transforms the `Option<T>` into a [`Result<T, E>`], mapping [`Some(v)`] to
-  // /// [`Ok(v)`] and [`None`] to [`Err(err)`].
-  // ///
-  // /// Arguments passed to `ok_or` are eagerly evaluated; if you are passing the
-  // /// result of a function call, it is recommended to use [`ok_or_else`], which is
-  // /// lazily evaluated.
-  // ///
-  // /// [`Ok(v)`]: Ok
-  // /// [`Err(err)`]: Err
-  // /// [`Some(v)`]: Some
-  // /// [`ok_or_else`]: Option::ok_or_else
-  // ///
-  // /// # Examples
-  // ///
-  // /// ```
-  // /// let x = Some("foo");
-  // /// assert_eq!(x.ok_or(0), Ok("foo"));
-  // ///
-  // /// let x: Option<&str> = None;
-  // /// assert_eq!(x.ok_or(0), Err(0));
-  // /// ```
-  // #[inline]
-  // #[stable(feature = "rust1", since = "1.0.0")]
-  // #[rustc_const_unstable(feature = "const_option_ext", issue = "91930")]
-  // pub const fn ok_or<E>(self, err: E) -> Result<T, E>
-  // where
-  //     E: ~const Destruct,
-  // {
-  //     match self {
-  //         Some(v) => Ok(v),
-  //         None => Err(err),
-  //     }
-  // }
+  /**
+   * Transforms the `Option<T>` into a {@link Result `Result<T, E>`}, mapping {@link Some `Some(v)`} to
+   * {@link Ok `Ok(v)`} and {@link None} to {@link Err `Err(err)`}.
+   *
+   * Arguments passed to `okOr` are eagerly evaluated; if you are passing the
+   * result of a function call, it is recommended to use {@link okOrElse}, which is
+   * lazily evaluated.
+   *
+   * # Examples
+   *
+   * ```ts
+   * const x = Some('foo');
+   * assert.deepEqual(x.okOr(0), Ok('foo'));
+   *
+   * const y: Option<string> = None;
+   * assert.deepEqual(y.okOr(0), Err(0));
+   * ```
+   *
+   * [In Rust](https://doc.rust-lang.org/std/option/enum.Option.html#method.ok_or)
+   */
+  okOr<T, E>(this: Option<T>, err: E): Result<T, E> {
+    return this.isSome() ? Ok(this.value) : Err(err);
+  }
 
-  // /// Transforms the `Option<T>` into a [`Result<T, E>`], mapping [`Some(v)`] to
-  // /// [`Ok(v)`] and [`None`] to [`Err(err())`].
-  // ///
-  // /// [`Ok(v)`]: Ok
-  // /// [`Err(err())`]: Err
-  // /// [`Some(v)`]: Some
-  // ///
-  // /// # Examples
-  // ///
-  // /// ```
-  // /// let x = Some("foo");
-  // /// assert_eq!(x.ok_or_else(|| 0), Ok("foo"));
-  // ///
-  // /// let x: Option<&str> = None;
-  // /// assert_eq!(x.ok_or_else(|| 0), Err(0));
-  // /// ```
-  // #[inline]
-  // #[stable(feature = "rust1", since = "1.0.0")]
-  // #[rustc_const_unstable(feature = "const_option_ext", issue = "91930")]
-  // pub const fn ok_or_else<E, F>(self, err: F) -> Result<T, E>
-  // where
-  //     F: ~const FnOnce() -> E,
-  //     F: ~const Destruct,
-  // {
-  //     match self {
-  //         Some(v) => Ok(v),
-  //         None => Err(err()),
-  //     }
-  // }
+  /**
+   * Transforms the `Option<T>` into a {@link Result `Result<T, E>`}, mapping {@link Some `Some(v)`} to
+   * {@link Ok `Ok(v)`} and {@link None} to {@link Err `Err(err())`}.
+   *
+   * # Examples
+   *
+   * ```ts
+   * const x = Some('foo');
+   * assert.deepEqual(x.okOrElse(() => 0), Ok('foo'));
+   *
+   * const y: Option<string> = None;
+   * assert.deepEqual(y.okOrElse(() => 0), Err(0));
+   * ```
+   *
+   * [In Rust](https://doc.rust-lang.org/std/option/enum.Option.html#method.ok_or_else)
+   */
+  okOrElse<T, E>(this: Option<T>, err: () => E): Result<T, E> {
+    return this.isSome() ? Ok(this.value) : Err(err());
+  }
 
   /**
    * Returns {@link None} if the option is {@link None}, otherwise returns `optb`.
@@ -436,32 +418,41 @@ export class OptionImpl {
       : None;
   }
 
-  // /// Transposes an `Option` of a [`Result`] into a [`Result`] of an `Option`.
-  // ///
-  // /// [`None`] will be mapped to <code>[Ok]\([None])</code>.
-  // /// <code>[Some]\([Ok]\(\_))</code> and <code>[Some]\([Err]\(\_))</code> will be mapped to
-  // /// <code>[Ok]\([Some]\(\_))</code> and <code>[Err]\(\_)</code>.
-  // ///
-  // /// # Examples
-  // ///
-  // /// ```
-  // /// #[derive(Debug, Eq, PartialEq)]
-  // /// struct SomeErr;
-  // ///
-  // /// let x: Result<Option<i32>, SomeErr> = Ok(Some(5));
-  // /// let y: Option<Result<i32, SomeErr>> = Some(Ok(5));
-  // /// assert_eq!(x, y.transpose());
-  // /// ```
-  // #[inline]
-  // #[stable(feature = "transpose_result", since = "1.33.0")]
-  // #[rustc_const_unstable(feature = "const_option", issue = "67441")]
-  // pub const fn transpose(self) -> Result<Option<T>, E> {
-  //     match self {
-  //         Some(Ok(x)) => Ok(Some(x)),
-  //         Some(Err(e)) => Err(e),
-  //         None => Ok(None),
-  //     }
-  // }
+  /**
+   * Transposes an `Option` of a {@link Result} into a {@link Result} of an `Option`.
+   *
+   * {@link None} will be mapped to {@link Ok}\({@link None}).
+   * {@link Some}\({@link Ok}\(\_)) and {@link Some}\({@link Err}\(\_)) will be mapped to
+   * {@link Ok}\({@link Some}\(\_)) and {@link Err}\(\_).
+   *
+   * # Examples
+   *
+   * ```ts
+   * type SomeErr = { message: string };
+   *
+   * const a: Option<Result<number, SomeErr>> = Some(Ok(5));
+   * const b: Result<Option<number>, SomeErr> = Ok(Some(5));
+   * assert.deepEqual(a.transpose(), b);
+   *
+   * const c: Option<Result<number, SomeErr>> = Some(Err({ message: 'some error' }));
+   * const d: Result<Option<number>, SomeErr> = Err({ message: 'some error' });
+   * assert.deepEqual(c.transpose(), d);
+   *
+   * const e: Option<Result<number, SomeErr>> = None;
+   * const f: Result<Option<number>, SomeErr> = Ok(None);
+   * assert.deepEqual(e.transpose(), f);
+   * ```
+   *
+   * [In Rust](https://doc.rust-lang.org/std/option/enum.Option.html#method.transpose)
+   */
+  transpose<T, E>(this: Option<Result<T, E>>): Result<Option<T>, E> {
+    if (this.isSome()) {
+      return this.value.isOk()
+        ? Ok(Some(this.value.value))
+        : Err(this.value.value);
+    }
+    return Ok(None);
+  }
 
   /**
    * Converts from `Option<Option<T>>` to `Option<T>`.
